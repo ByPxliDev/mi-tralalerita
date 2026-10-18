@@ -1,1 +1,418 @@
-<h1>Aun no :) </h1>
+<!doctype html>
+<html lang="es">
+<head>
+<meta name="referrer" content="no-referrer">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Del 23 al 26 con fotos</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400..900&family=Figtree:wght@400;500;700&family=JetBrains+Mono:wght@500;700&display=swap">
+<style>
+/*Aun faltaban muchas imagenes angelita, pero no tenia sus copias, lo siento mucho */
+:root{
+  --ink:#16122B;
+  --ink-a:rgba(22,18,43,.22);
+  --cream:#F6F0E2;
+  --hair:rgba(246,240,226,.2);
+  --p0:#a83dff;
+  --p1:#35D8B0;
+  --p2:#FF8DC9;
+  --rec:#FF4D4D;
+  --f-display:"Unbounded","Arial Black",system-ui,sans-serif;
+  --f-body:"Figtree",system-ui,sans-serif;
+  --f-mono:"JetBrains Mono",ui-monospace,Menlo,monospace;
+}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:var(--ink);color:var(--cream);font:400 1rem/1.55 var(--f-body);overflow-x:clip}
+.wrap{max-width:1100px;margin-inline:auto}
+
+/* ---------- HUD ---------- */
+.hud{position:fixed;top:0;left:0;right:0;z-index:20;display:flex;justify-content:space-between;align-items:center;gap:1rem;padding:calc(.65rem + env(safe-area-inset-top,0px)) 16px .65rem;background:var(--ink);border-bottom:1px solid var(--hair);font:700 .75rem/1 var(--f-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--cream)}
+.hud b{color:var(--hc,var(--p0));font-weight:700;font-variant-numeric:tabular-nums}
+.hud .bar{position:absolute;left:0;right:0;bottom:-1px;height:3px;background:var(--hc,var(--p0));transform-origin:left;transform:scaleX(var(--prog,0))}
+.rec{display:inline-block;width:.6rem;height:.6rem;border-radius:50%;background:var(--rec);margin-right:.55rem;animation:blink 1.2s steps(1) infinite}
+
+/* ---------- Portada ---------- */
+.hero{position:relative;overflow:hidden;padding-block:5.5rem clamp(3rem,8vw,6rem);padding-inline:16px}
+.hero .wrap{position:relative;z-index:1}
+.eyebrow{margin:0;font:700 .8rem/1 var(--f-mono);letter-spacing:.16em;text-transform:uppercase;color:var(--cream)}
+.years{margin:1.4rem 0 1.6rem;display:flex;flex-wrap:wrap;align-items:center;gap:.3em 1.1rem;font:900 clamp(3.4rem,11vw,8rem)/.95 var(--f-display);letter-spacing:-.03em}
+.yr{display:inline-flex}
+.yr span{display:inline-block;animation:drop .9s cubic-bezier(.2,1.5,.4,1) both;animation-delay:calc(var(--i) * 90ms)}
+.yr.a{color:var(--p0)}
+.yr.b{color:var(--p2)}
+.arrow{flex:none;height:auto}
+.arrow path{fill:none;stroke:var(--cream);stroke-width:8;stroke-linecap:square;stroke-dasharray:240;animation:draw 1.1s .4s ease both}
+.arrow.ah{width:clamp(64px,10vw,130px)}
+.arrow.av{display:none;width:34px}
+.lede{margin:0;max-width:34ch;font-size:1.2rem}
+.lede b{color:var(--p1);font-family:var(--f-mono);font-weight:700}
+.cue{margin:2.2rem 0 0;display:inline-flex;align-items:center;gap:.7rem;font:700 .8rem/1 var(--f-mono);letter-spacing:.16em;text-transform:uppercase}
+.cue i{display:inline-block;font-style:normal;font-size:1.3rem;animation:bounce 1.4s ease-in-out infinite}
+.deco{position:absolute;pointer-events:none;color:var(--hair)}
+.deco svg{display:block;width:100%;height:auto;fill:none;stroke:currentColor;stroke-width:.7}
+.deco.d1{right:-90px;top:70px;width:320px}
+.deco.d2{right:14%;bottom:30px;width:150px}
+.deco.d2 svg{animation:pulse 5s ease-in-out infinite}
+.spin-slow{animation:spin 60s linear infinite}
+
+/* ---------- Línea de tiempo ---------- */
+main{position:relative}
+.spine{position:absolute;top:0;bottom:0;left:calc(50% - 2px);width:4px;background:var(--ink-a);z-index:1}
+.spine i{position:absolute;inset:0;background:var(--ink);transform-origin:top;transform:scaleY(var(--s,0))}
+.year{position:relative;background:var(--c);color:var(--ink);overflow-x:clip}
+.year-head{position:relative;z-index:2;background:var(--c);overflow-x:clip;padding-block:clamp(2.5rem,7vw,5rem) clamp(1rem,3vw,2rem);padding-inline:16px}
+.year-head .wrap{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:.75rem 2rem}
+.year-num{margin:0;font:900 clamp(4rem,21vw,14rem)/.85 var(--f-display);letter-spacing:-.04em;color:var(--ink);text-shadow:.045em .045em 0 var(--cream);white-space:nowrap;transform:translateX(calc(var(--dx,0) * 1vw))}
+.year-num span{display:inline-block;transform:translateY(var(--dy,0px))}
+.year-meta{margin:0;padding-bottom:.6rem;font:700 .8rem/1 var(--f-mono);letter-spacing:.14em;text-transform:uppercase}
+
+.evs{list-style:none;margin:0 auto;max-width:1100px;padding-block:1.5rem clamp(3rem,8vw,5rem);padding-inline:16px}
+.ev{display:grid;grid-template-columns:1fr 56px 1fr;align-items:center}
+.ev + .ev{margin-top:clamp(2.5rem,7vw,4.5rem)}
+.ev.l .card{grid-column:1;grid-row:1}
+.ev.r .card{grid-column:3;grid-row:1}
+.node{grid-column:2;grid-row:1;position:relative;z-index:2;height:28px;display:grid;place-items:center}
+.node::before{content:"";position:absolute;top:50%;height:4px;margin-top:-2px;width:50%;background:var(--ink)}
+.ev.l .node::before{left:0}
+.ev.r .node::before{right:0}
+.node b{position:relative;width:28px;height:28px;border-radius:50%;border:4px solid var(--ink);background:var(--cream);transition:transform .35s cubic-bezier(.2,1.6,.4,1),background .3s}
+.node b::after{content:"";position:absolute;inset:4px;border-radius:50%;background:var(--c);transform:scale(0);transition:transform .35s cubic-bezier(.2,1.6,.4,1)}
+.ev.passed .node b{background:var(--ink);transform:scale(1.18)}
+.ev.passed .node b::after{transform:scale(1)}
+
+.card{position:relative;z-index:2;min-width:0;background:var(--cream);color:var(--ink);border:3px solid var(--ink);padding:1.1rem 1.25rem 1.4rem;box-shadow:7px 7px 0 var(--ink);transition:transform .45s cubic-bezier(.2,1.4,.4,1),box-shadow .25s}
+.card:hover{transform:translate(-3px,-3px);box-shadow:11px 11px 0 var(--ink)}
+.ev.l .card.pre{transform:translateY(28px) rotate(-1.5deg) scale(.96)}
+.ev.r .card.pre{transform:translateY(28px) rotate(1.5deg) scale(.96)}
+.card-top{margin-bottom:.95rem}
+.chip{display:inline-block;background:var(--c);border:3px solid var(--ink);padding:.4rem .6rem;font:700 .75rem/1 var(--f-mono);letter-spacing:.12em;text-transform:uppercase}
+.chip.hoy{background:var(--ink);color:var(--cream)}
+.card h3{margin:0 0 .5rem;font:700 clamp(1.1rem,2.8vw,1.5rem)/1.15 var(--f-display);letter-spacing:-.02em;text-wrap:balance}
+.card p{margin:0;max-width:42ch}
+
+/* espacio de foto: se ve el marcador hasta que el img tenga src */
+.foto{position:relative;margin:-1.1rem -1.25rem 1.1rem;aspect-ratio:4/3;overflow:hidden;border-bottom:3px solid var(--ink);background:repeating-linear-gradient(135deg,var(--c) 0 14px,var(--cream) 14px 28px)}
+.foto img{position:absolute;inset:0;display:block;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .4s}
+.foto img.loaded{opacity:1}
+.foto img[src=""]{display:none}
+.foto::after{content:"Aquí va tu foto";position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);padding:.6rem .85rem;background:var(--ink);color:var(--cream);font:700 .75rem/1 var(--f-mono);letter-spacing:.12em;text-transform:uppercase;white-space:nowrap}
+.foto.has::after{content:"Cargando foto…"}
+.foto.bad::after{content:"No cargó la foto"}
+.foto.ok{background:var(--ink)}
+.foto.ok::after{display:none !important}
+
+/* visor de foto (modal) */
+.foto.ok{cursor:zoom-in}
+.foto.ok:focus-visible{outline:3px solid var(--p2);outline-offset:-8px}
+.lb{position:fixed;inset:0;z-index:100;display:none;align-items:center;justify-content:center;padding:calc(64px + env(safe-area-inset-top,0px)) 16px calc(16px + env(safe-area-inset-bottom,0px));background:rgba(22,18,43,.94);cursor:zoom-out}
+.lb.open{display:flex;animation:lbin .25s ease both}
+.lb-box{display:flex;flex-direction:column;align-items:center;gap:.9rem;max-width:100%;min-width:0}
+.lb img{display:block;max-width:100%;max-height:calc(100vh - 11rem);max-height:calc(100dvh - 11rem);width:auto;height:auto;object-fit:contain;border:3px solid var(--cream);background:var(--ink);box-shadow:8px 8px 0 var(--p0);cursor:default}
+.lb-cap{margin:0;max-width:60ch;text-align:center;font:700 .8rem/1.3 var(--f-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--cream)}
+.lb-x{position:absolute;top:calc(12px + env(safe-area-inset-top,0px));right:16px;width:44px;height:44px;display:grid;place-items:center;padding:0;background:var(--cream);color:var(--ink);border:3px solid var(--cream);box-shadow:4px 4px 0 var(--p1);font:700 1.4rem/1 var(--f-mono);cursor:pointer}
+.lb-x:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--p1)}
+.lb-x:focus-visible{outline:3px solid var(--p2);outline-offset:4px}
+@keyframes lbin{from{opacity:0}}
+
+/* cintas entre años */
+.band-wrap{position:relative;z-index:3;overflow:hidden;padding-block:clamp(1.6rem,4vw,3.2rem);background:linear-gradient(var(--from) 50%,var(--to) 50%)}
+.band{width:112%;margin-inline:-6%;transform:rotate(-1.8deg);background:var(--ink);color:var(--to);overflow:hidden}
+.track{display:flex;width:max-content;animation:slide 32s linear infinite}
+.band.rev .track{animation-direction:reverse}
+.track span{white-space:nowrap;padding-block:.9rem;font:900 clamp(1.3rem,4vw,2.4rem)/1 var(--f-display);letter-spacing:.02em}
+
+/* cierre */
+.next{background:var(--ink);color:var(--cream);padding-block:clamp(4rem,10vw,8rem);padding-inline:16px}
+.next .eyebrow{color:var(--p0)}
+.next h2{margin:1rem 0 1.1rem;font:900 clamp(2.4rem,9vw,6rem)/.95 var(--f-display);letter-spacing:-.03em;text-wrap:balance}
+.caret{display:inline-block;width:.09em;height:.8em;margin-left:.12em;background:var(--p2);vertical-align:-.05em;animation:blink 1s steps(1) infinite}
+.next p{margin:0 0 2rem;max-width:36ch;font-size:1.15rem}
+.btn{font:700 .8rem/1 var(--f-mono);letter-spacing:.12em;text-transform:uppercase;background:var(--cream);color:var(--ink);border:3px solid var(--cream);padding:.95rem 1.25rem;box-shadow:6px 6px 0 var(--p1);cursor:pointer;transition:transform .2s,box-shadow .2s}
+.btn:hover{transform:translate(-2px,-2px);box-shadow:9px 9px 0 var(--p1)}
+.btn:focus-visible{outline:3px solid var(--p2);outline-offset:4px}
+
+/* ---------- Animaciones ---------- */
+@keyframes blink{50%{opacity:0}}
+@keyframes bounce{50%{transform:translateY(8px)}}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes pulse{50%{transform:scale(1.35)}}
+@keyframes slide{to{transform:translateX(-50%)}}
+@keyframes drop{from{transform:translateY(-45%) rotate(-10deg) scale(.7)}}
+@keyframes draw{from{stroke-dashoffset:240}}
+
+/* ---------- Teléfono ---------- */
+@media (max-width:1100px){
+  .years{flex-direction:column;align-items:flex-start}
+  .arrow.ah{display:none}
+  .arrow.av{display:block}
+}
+@media (max-width:720px){
+  .deco.d1{width:220px;right:-70px;top:60px}
+  .deco.d2{width:90px;bottom:20px}
+  .spine{left:calc(16px + 22px - 2px)}
+  .ev{grid-template-columns:44px 1fr}
+  .node{grid-column:1}
+  .ev.l .card,.ev.r .card{grid-column:2}
+  .ev.l .node::before,.ev.r .node::before{left:50%;right:auto}
+  .card{box-shadow:5px 5px 0 var(--ink)}
+}
+
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="deco d1" aria-hidden="true"></div>
+  <div class="deco d2" aria-hidden="true"></div>
+  <div class="wrap">
+    <p class="eyebrow">Para ti · Línea de tiempo</p>
+    <h1 class="years" aria-label="De 2024 a 2026">
+      <span class="yr a" aria-hidden="true"><span style="--i:0">2</span><span style="--i:1">0</span><span style="--i:2">2</span><span style="--i:3">3</span></span>
+      <svg class="arrow ah" viewBox="0 0 120 40" aria-hidden="true"><path d="M4 20 H108 M90 4 L112 20 L90 36"/></svg>
+      <svg class="arrow av" viewBox="0 0 40 120" aria-hidden="true"><path d="M20 4 V108 M4 90 L20 112 L36 90"/></svg>
+      <span class="yr b" aria-hidden="true"><span style="--i:4">2</span><span style="--i:5">0</span><span style="--i:6">2</span><span style="--i:7">6</span></span>
+    </h1>
+    <p class="lede">Baja para ver los <b id="n">9</b> momentos, uno por uno.</p>
+    <p class="cue"><span>Baja</span><i aria-hidden="true">↓</i></p>
+  </div>
+</header>
+
+<main id="tl"></main>
+
+<section class="next">
+  <div class="wrap">
+    <p class="eyebrow">2027 →</p>
+    <h2>Gracias tonotita</h2>
+    <p>Angela, la verdad cumpli muchas cosas contigo, creamos lindo recuerdos juntos, expericias que jamas podre quitarme de la cabeza, y creeme no quiero olvidarme de ti jamas</p>
+    <p>Eres y seras parte de mi vida por todo el tiempo que sigamos siendo hermanitos, angela, nuestra relacion amistosa simplemente es tan fuerte que las peleas solo fueron eventos que pasaron muy rapido</p>
+    <p>Jamas olvidaria todo lo lindo que hiciste por mi y yo por ti, aunque no eres mi hermana biologica eso no quita que se siga queriendo como nunca mas, y algo mas angela</p>
+    <p>Eres alguien indispensable en mi vida, sinceramente espero durar mucho mas tiempo contigo, gracias por acompañarme en esta linda y hermosa aventura preparatoriana</p>
+    <p>Si llego a tener hijos les dire que eres la tia chidolira, y ah si creo que nuestro humor es algo unico y sinceramente, dejaria de programar si tengo que decidir si seguir con esta linda pero importante amistad o no</p>
+    <p>Hay muchas cosas que siempre quise hacer por ti, y muchas veces no podia, simplemente no sabia como expresarlo y por que no tenia dinero. y siempre busque esa aprobacion, pero vi que contigo no necesito nada de eso y simplemente podia ser yo</p>
+    <p>Angela, feliz cumpleaños 18, y feliz por esta amistad.</p>
+    <p>Te quiero mucho angela, mucho mucho y no sabes cuanto haria por darte ese sape que entre los 2 sabemos que es de cariño</p>
+    <p>Con mucho cariño, estes, desvelo y cansancio</p>
+    <p>Hecho por Alan con mucho cariño para ti angelita, disfuta tu dia tralaleria, te quiero.</p>
+    <button class="btn" id="top" type="button">Volver al inicio ↑</button><br><br>
+    <a class="btn" href="https://www.roblox.com/es/games/110836894992568/Feli-Cumpleeeeeeee" type="button">Tu cumple en bobox 2023</a><br><br><br>
+    <a class="btn" href="https://www.roblox.com/es/games/140496213676092/Ola-vro" type="button">Tu juego favorito¿</a>
+    <h6>Yayaya mucho cariño, yo ya no soi asi, sjjdjsjdj bai.</h6>
+  </div>
+</section>
+
+<div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="Foto ampliada" aria-hidden="true">
+  <button class="lb-x" type="button" aria-label="Cerrar foto">×</button>
+  <div class="lb-box">
+    <img alt="" referrerpolicy="no-referrer">
+    <p class="lb-cap"></p>
+  </div>
+</div>
+
+<script>
+(function(){
+
+var EVENTOS=[
+  {fecha:'2023-09-21',titulo:'Nos conocimos',texto:'Sinceramente no sabia los momentos que viviriamos apartir de ese dia que aurora nos presento.',foto:'images/IMG_20230316_191127_1.jpg'},
+  {fecha:'2023-10-18',titulo:'Feliz pumpleee',texto:'Aun no te conocia lo suficiente, y no estaba seguro de ir, perdoname mi blosissista.',foto:'images/IMG_20230316_191127_1.jpg'},
+  {fecha:'2023-10-08',titulo:'Abrazosss',texto:'Abrazos, bueno recuerdo el primer abrazo que te di, y la verdad es uno de esos recuerdos que no me saco del koko.',foto:'images/IMG_20230316_191127_1.jpg'},
+  {fecha:'2023-11-01',titulo:'Vivimos momentos?',texto:'La verdad es que si, cuando nos dijieron que habia dia de lokura, me desate y aunque no fue mucho tiempo contigo la verdad :c.',foto:'images/IMG_20230316_191127_1.jpg'},
+  {fecha:'2023-12-11',titulo:'Mi cumple',texto:'Simplemente, pasemos de evento, gracias por festejarlo.',foto:'images/IMG_20230316_191127_1.jpg'},
+  {fecha:'2024-01-03',titulo:'Año nuevo o momentos nuevos?',texto:'Sentia en esos momentos que aun no contabamos con la siguiente confianza uno del otro.',foto:'images/IMG_20230316_191127_1.jpg'},
+  {fecha:'2024-02-06',titulo:'2do Semestre',texto:'Ese dia llore, pensaba que jamas te volveria a ver por mis faltas y acciones que tomaba antes, afortunadamente pude tener la oportunidad de conocerte de estudiar contigo.',foto:'images/IMG_20230316_191127_1.jpg'},
+  {fecha:'2024-03-15',titulo:'ANGELITAAAA',texto:'Muchos de los momentos que vivimos juntos son inolvidables y la verdad prefiero morir sabiendo que tuve una linda amistad contigo.',foto:'images/IMG_20230316_191127_1.jpg'},
+  {fecha:'2024-04-03',titulo:'Imagenes muy... xd',texto:'Jsjsjsjs una de las miles de fotos de nosotros!.',foto:'images/IMG-20240503-WA0021.jpg'},
+  {fecha:'2024-04-17',titulo:'Mi noche',texto:'Es lindo que aun conserve estas fotos de estos momentos, angela sinceramente es muy lindo saber que puedo seguir siendo tu amigo, y eso es lo unico que me importa ahora mismo.',foto:'images/IMG_20240517_204738454.jpg'},
+  {fecha:'2024-06-07',titulo:'Galeria de fotos?',texto:'Simplemente las guarde, forman una linda parte de mi amistad contigo, y se vem bonitas en mi galeria.',foto:'images/IMG_20240607_183025_398~2.jpg'},
+  {fecha:'2024-08-30',titulo:'FAMOSO',texto:'NO ME GUSTAN LAS FOTOS AAAAAAAAAAAAAA, pero gracias angelita ^^.',foto:'images/PXL_20240830_190340709.jpg'},
+  {fecha:'2024-09-05',titulo:'LUZZZZ',texto:'Esta foto no se, me gusta jsakdjas pero a ti no.',foto:'images/IMG_20240905_185344725.jpg'},
+  {fecha:'2024-09-13',titulo:'4 by 4',texto:'Yu,. rica mi agua de la mochoacana lindas.',foto:'images/IMG_20240913_192155_618.jpg'},
+  {fecha:'2024-09-26',titulo:'AÑÑÑÑÑ',texto:'Nunca pense que te tendria una amistad tan increible. linda y especial como la de nosotros.',foto:'images/PXL_20240926_165853210.PORTRAIT.jpg'},
+  {fecha:'2024-09-27',titulo:'NUV',texto:'OKLAYITO DE UNA BABOSA AJSDAKDKAJ, ya en serio gracias por las miles de fotos, son las increibles y dejan de ser solo imagenes para mi.',foto:'images/PXL_20240927_193718596.MV.jpg'},
+  {fecha:'2024-10-20',titulo:'A mimirs',texto:'No hacias nada ese dia, ntc solo te burlabas de mi y me mojabas con globos de agua, mocosa grrrrrr.',foto:'images/PXL_20241020_163901112.jpg'},
+  {fecha:'2024-11-27',titulo:'My talking angela',texto:'Hablanding con gael, sin pelarme para poder molestarte, grrrrrrr.',foto:'images/PXL_20241127_182321263.MV.jpg'},
+  {fecha:'2024-12-31',titulo:'Dan Da Dan!',texto:'Solo la vi por que si taba chida y para verla contigo ^^.',foto:'images/PXL_20250101_031015758.jpg'},
+  {fecha:'2025-01-26',titulo:'Video x Video',texto:'Muajjajaja nuestro primer y unico trend que hicimos, angela que epiko <3.',foto:'images/img.png'},
+  {fecha:'2025-02-02',titulo:'Comoasiblooo',texto:'LA Q TRABAJA AHORA ES OTRO????.',foto:'images/IMG_20250202_001350_170.jpg'},
+  {fecha:'2025-02-04',titulo:'HELLOOO',texto:'HELLOOOO, jajaja e veias ttan babosita xdxdxdxdxdxd.',foto:'images/PXL_20250204_235607248.jpg'},
+  {fecha:'2025-02-25',titulo:'Chika kul',texto:'Aka ya tirabas aura si siquiera antes de que exisitiera esa palabra.',foto:'images/PXL_20250226_011513598.PANO.jpg'},
+  {fecha:'2025-03-12',titulo:'Fotos y mas fotos??',texto:'Es increible la capacidad de saber que tengo tantas fotos tuyas.',foto:'images/PXL_20250214_003858222.jpg'},
+  {fecha:'2025-03-12',titulo:'NO PICS',texto:'Te valia papoi y me tomabas fotitos grrrr.',foto:'images/PXL_20250313_001036503.MP.jpg'},
+  {fecha:'2025-04-12',titulo:'HIJA DE LA V#####',texto:'Por QuE SiGo TenIenDo EstA foTo ComO La EliMiNo¡!¿.',foto:'images/PXL_20250512_203609217.jpg'},
+  {fecha:'2025-04-21',titulo:'Clownssss',texto:'Unos payasitos, buenos payasitos ^^.',foto:'images/IMG-20250521-WA0015.jpg'},
+  {fecha:'2025-04-21',titulo:'PAYASITAAAAAA',texto:'No lo se, pero, ese dia fue muy especial por todas las babosadas que hicimos.',foto:'images/PXL_20250521_232834721.jpg'},
+  {fecha:'2025-05-05',titulo:'UUhh Answers',texto:'Okei okei, encuestas y mas encuestas, increible siguiente!!.',foto:'images/PXL_20250605_210638209.jpg'},
+  {fecha:'2025-05-09',titulo:'*Sorbito*',texto:'No me diste, envidiosa grrr, aun asi te robe jsajdskasjdka, te kiero muchoototototootte.',foto:'images/PXL_20250609_204852816.jpg'},
+  {fecha:'2025-06-01',titulo:'Sin fotitos',texto:'Ya sabemos por quien, nos ausentamos y perdimos muchas fotos.',foto:'images/.Screenshot_20250625-214617.png'},
+  {fecha:'2025-08-12',titulo:'I look very good!',texto:'Gracias por ese lindo retrato de mi avatar angelita.',foto:'images/IMG_20250812_000541_066.jpg'},
+  {fecha:'2025-08-12',titulo:'AJADKAD!',texto:'SOY DAVINCI ANGELA, Respetame!!!',foto:'images/17 sin título_20250812005601.png'},
+  {fecha:'2025-10-22',titulo:'GLOBOZZZ',texto:'Eras una chika de puro toke, de los pelos parados o q jsajsdksjad.',foto:'images/2025-10-22-19-26-46-180.jpg'},
+  {fecha:'2025-11-28',titulo:'DUENDE CAPTADA EN CAMARA',texto:'Increible, una duendecita ^^ que la tengo de amiga.',foto:'images/2025-11-28-16-37-00-972.jpg'},
+  {fecha:'2026-03-24',titulo:'4 Ever',texto:'Nuestas lokuras mi blosita.',foto:'images/2026-03-24-15-12-34-203.jpg'},
+  {fecha:'2026-04-27',titulo:'Primeras fotos',texto:'Estrenaste con unas lindas fotos la camara de mi pixel ^^.',foto:'images/PXL_20260427_232330324.PORTRAIT.jpg'},
+  {fecha:'2026-04-27',titulo:'Rodadora',texto:'Mi primera foto de mi primera salida que a medias funciono.',foto:'images/PXL_20260523_203518634.jpg'},
+  {fecha:'2026-05-26',titulo:'Thogether',texto:'Nuestros deditos, increible fotito angelita ^^.',foto:'images/IMG_2026-05-26-16-25-52-168~2.jpg'},
+  {fecha:'2026-05-26',titulo:'Flowers',texto:'Muchas gracias por la flor angelita, pero por que la tiraste?.',foto:'images/PXL_20260527_002311221.jpg'},
+  {fecha:'2026-06-01',titulo:'UFASS',texto:'Oye, creo que, tu, cara, esta muy... ._. jaskdjakdjasd no te creas mi blo, sjadkajsdjka me encantaba tomarte fotos super randoms jaskdjakjsd, es mi esencia :p.',foto:'images/PXL_20260602_004511946.jpg'},
+  {fecha:'2026-06-02',titulo:'Crecen tan rapido',texto:'No se que decir, simplemente me hace sentir muy feliz y hasta llorar.',foto:'images/PXL_20260602_234003336.jpg'},
+  {fecha:'2026-06-08',titulo:'Antes de la tragedia',texto:'Si bien no fue tragedia si me hacia sentir muy triste la idea de que ya se habia acabado nuestra prepa, y sinceramente llore mucho, bien sabes que soy muy sencible...',foto:'images/PXL_20260609_024717187.jpg'},
+  {fecha:'2026-06-11',titulo:'Hermano?, que es esooo?',texto:'Check my post bro. UWU',foto:'images/PXL_20260612_023445613.jpg'},
+  {fecha:'2026-08-09',titulo:'The end?',texto:'Una ultima foto de los 4 casi igual a la que nos tomamos en un inicio, es... muy lindo <3.',foto:'images/PXL_20260610_025708846.jpg'},
+  {fecha:'2026-08-29',titulo:'Acabo aqui o no?',texto:'Angela siempre te quise ver con tu birrete y tu toga, y fui afortunado de acompañarte en este momento.',foto:'images/PXL_20260629_222405548.jpg'},
+  {fecha:'2026-08-30',titulo:'[<3]',texto:'Fue el ultimo dia que te vi, fue el ultimo dia que te pude abrazar, y fue el ultimo dia que te pude recordar asi, angela increible forma de despedirme de ti, y es tal lindo que aun sigamos con esta amistad.',foto:'images/PXL_20260701_025606628.jpg'},
+  {fecha:'2026-10-14',titulo:'Me dio toques',texto:'In dia como mocosa electrisista, por fortuna no te elektrokutaste.',foto:'images/PXL_20260701_025606628.jpg'},
+  {fecha:'2026-10-18',titulo:'Hoy, tu Cumple 18',texto:'Cumplimos 3 años de amistad y no lo rebajo solo a una simple amistad, si no a algo mas cercano a una familia, ademas, es tu pumple 18, ya eres toda una mocosa grande, y eso es lo mas feliz del mundo mundial.',foto:'images/apol.jpg',hoy:true}
+];
+
+var MESES=['ENE','FEB','MAR','ABR','MAY','JUN','JUL','AGO','SEP','OCT','NOV','DIC'];
+var reduce=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+function pad(n,l){return String(n).padStart(l||2,'0')}
+function clamp(v,a,b){return Math.min(b,Math.max(a,v))}
+function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+function star(n,R,r){var p=[];for(var i=0;i<n*2;i++){var a=Math.PI*i/n,rad=i%2?r:R;p.push((32+rad*Math.cos(a)).toFixed(1)+','+(32+rad*Math.sin(a)).toFixed(1))}return p.join(' ')}
+
+document.querySelector('.d1').innerHTML='<svg viewBox="0 0 64 64" class="spin-slow"><polygon points="'+star(12,31,18)+'"/></svg>';
+document.querySelector('.d2').innerHTML='<svg viewBox="0 0 64 64"><circle cx="32" cy="32" r="30"/><circle cx="32" cy="32" r="21"/><circle cx="32" cy="32" r="12"/></svg>';
+
+var evs=EVENTOS.map(function(e){var p=e.fecha.split('-').map(Number);return Object.assign({},e,{y:p[0],m:p[1],d:p[2],t:new Date(p[0],p[1]-1,p[2]).getTime()})}).sort(function(a,b){return a.t-b.t});
+var years=[];evs.forEach(function(e){if(years.indexOf(e.y)<0)years.push(e.y)});
+document.getElementById('n').textContent=evs.length;
+
+function band(pf,pt,k){
+  var t='';for(var i=0;i<14;i++)t+=years[pt]+' → ';
+  return '<div class="band-wrap" aria-hidden="true" style="--from:var(--p'+(pf%3)+');--to:var(--p'+(pt%3)+')"><div class="band'+(k%2?' rev':'')+'"><div class="track"><span>'+t+'</span><span>'+t+'</span></div></div></div>';
+}
+
+var html='<div class="spine" aria-hidden="true"><i></i></div>',gi=0;
+years.forEach(function(y,yi){
+  var list=evs.filter(function(e){return e.y===y});
+  if(yi>0){html+=band(yi-1,yi,yi)}
+  html+='<section class="year" style="--c:var(--p'+(yi%3)+')" data-yi="'+yi+'"><div class="year-head"><div class="wrap"><h2 class="year-num" aria-label="'+y+'">'+String(y).split('').map(function(ch){return '<span aria-hidden="true">'+ch+'</span>'}).join('')+'</h2><p class="year-meta">'+list.length+' '+(list.length===1?'momento':'momentos')+'</p></div></div><ol class="evs">';
+  list.forEach(function(e){
+    var side=gi%2?'r':'l';gi++;
+    var src=e.foto||'';
+    html+='<li class="ev '+side+'" data-t="'+e.t+'"><div class="node" aria-hidden="true"><b></b></div><article class="card"><figure class="foto'+(src?' has':'')+'"><img src="'+esc(src)+'" alt="'+esc(e.titulo)+'" decoding="async" referrerpolicy="no-referrer"></figure><div class="card-top"><span class="chip'+(e.hoy?' hoy':'')+'">'+(e.hoy?'Hoy · ':'')+e.d+' '+MESES[e.m-1]+'</span></div><h3>'+esc(e.titulo)+'</h3><p>'+esc(e.texto)+'</p></article></li>';
+  });
+  html+='</ol></section>';
+});
+var main=document.getElementById('tl');
+main.innerHTML=html;
+
+/* si una foto no carga (ruta mala), vuelve a verse el marcador */
+[].forEach.call(main.querySelectorAll('.foto img'),function(im){
+  var fig=im.parentNode;
+  if(!im.getAttribute('src'))return;
+  function ok(){im.classList.add('loaded');fig.classList.add('ok');fig.classList.remove('bad');fig.tabIndex=0;fig.setAttribute('role','button');fig.setAttribute('aria-label','Ver foto completa: '+im.alt)}
+  function bad(){fig.classList.remove('ok');fig.classList.add('bad');fig.removeAttribute('tabindex');fig.removeAttribute('role');fig.removeAttribute('aria-label')}
+  im.addEventListener('load',ok);
+  im.addEventListener('error',bad);
+  if(im.complete){if(im.naturalWidth)ok();else bad()}
+});
+
+/* ---------- visor de foto ---------- */
+var lb=document.getElementById('lb'),lbImg=lb.querySelector('img'),lbCap=lb.querySelector('.lb-cap'),lbX=lb.querySelector('.lb-x'),lbFrom=null;
+function openLb(fig){
+  var im=fig.querySelector('img');
+  lbFrom=fig;
+  lbImg.src=im.currentSrc||im.src;
+  lbImg.alt=im.alt;
+  lbCap.textContent=im.alt;
+  lb.classList.add('open');
+  lb.setAttribute('aria-hidden','false');
+  document.body.style.overflow='hidden';
+  lbX.focus();
+}
+function closeLb(){
+  if(!lb.classList.contains('open'))return;
+  lb.classList.remove('open');
+  lb.setAttribute('aria-hidden','true');
+  document.body.style.overflow='';
+  lbImg.removeAttribute('src');
+  if(lbFrom)lbFrom.focus({preventScroll:true});
+}
+main.addEventListener('click',function(e){
+  var fig=e.target.closest&&e.target.closest('.foto.ok');
+  if(fig)openLb(fig);
+});
+main.addEventListener('keydown',function(e){
+  if(e.key!=='Enter'&&e.key!==' ')return;
+  var fig=e.target.closest&&e.target.closest('.foto.ok');
+  if(fig&&e.target===fig){e.preventDefault();openLb(fig)}
+});
+lb.addEventListener('click',function(e){if(e.target!==lbImg)closeLb()});
+document.addEventListener('keydown',function(e){
+  if(!lb.classList.contains('open'))return;
+  if(e.key==='Escape')closeLb();
+  else if(e.key==='Tab'){e.preventDefault();lbX.focus()}
+});
+
+var hud=document.querySelector('.hud'),tcEl=document.getElementById('tc'),pctEl=document.getElementById('pct');
+var spine=main.querySelector('.spine i');
+var cards=[].slice.call(main.querySelectorAll('.ev'));
+var secs=[].slice.call(main.querySelectorAll('.year'));
+var T0=new Date(years[0],0,1).getTime();
+var last=evs[evs.length-1];
+var marks=[],tlTop=0,tlH=1,secInfo=[],docMax=1,raf=0;
+
+function top(el){return el.getBoundingClientRect().top+window.scrollY}
+function measure(){
+  tlTop=top(main);tlH=Math.max(1,main.offsetHeight);
+  marks=cards.map(function(c){return {y:top(c)+c.offsetHeight/2,t:+c.dataset.t}});
+  secInfo=secs.map(function(s){return {top:top(s),h:s.offsetHeight,num:s.querySelector('.year-num'),digits:[].slice.call(s.querySelectorAll('.year-num span'))}});
+  docMax=Math.max(1,document.documentElement.scrollHeight-window.innerHeight);
+}
+function timeAt(y){
+  var pts=[{y:tlTop,t:T0}].concat(marks,[{y:tlTop+tlH,t:last.t}]);
+  if(y<=pts[0].y)return pts[0].t;
+  for(var i=0;i<pts.length-1;i++){
+    if(y<pts[i+1].y){var a=pts[i],b=pts[i+1],k=(y-a.y)/Math.max(1,b.y-a.y);return a.t+(b.t-a.t)*k}
+  }
+  return pts[pts.length-1].t;
+}
+function frame(){
+  raf=0;
+  var sy=window.scrollY,vh=window.innerHeight,yMid=sy+vh*.5;
+  var p=clamp(sy/docMax,0,1);
+  if(hud)hud.style.setProperty('--prog',p.toFixed(4));
+  if(pctEl)pctEl.textContent=pad(Math.round(p*100),3);
+  var t=timeAt(yMid),d=new Date(t);
+  var yi=clamp(years.indexOf(d.getFullYear()),0,years.length-1);
+  if(hud)hud.style.setProperty('--hc','var(--p'+(yi%3)+')');
+  if(tcEl)tcEl.textContent=d.getFullYear()+'.'+pad(d.getMonth()+1)+'.'+pad(d.getDate())+(last.hoy&&t>=last.t-1?' · HOY':'');
+  spine.style.setProperty('--s',clamp((yMid-tlTop)/tlH,0,1).toFixed(4));
+  cards.forEach(function(c,i){c.classList.toggle('passed',marks[i]&&marks[i].y<yMid)});
+  if(!reduce){
+    secInfo.forEach(function(s){
+      var q=clamp((yMid-(s.top+s.h/2))/(s.h/2+vh/2),-1,1);
+      if(Math.abs(q)<1){
+        s.num.style.setProperty('--dx',(q*-4).toFixed(2));
+        s.digits.forEach(function(dg,i){dg.style.setProperty('--dy',(Math.sin(sy*.006+i*1.1)*7).toFixed(1)+'px')});
+      }
+    });
+  }
+}
+function request(){if(!raf)raf=requestAnimationFrame(frame)}
+
+if(!reduce&&'IntersectionObserver' in window){
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.remove('pre');io.unobserve(e.target)}})},{rootMargin:'0px 0px -10% 0px'});
+  cards.forEach(function(li){
+    var c=li.querySelector('.card');
+    if(li.getBoundingClientRect().top>window.innerHeight*.9){c.classList.add('pre');io.observe(c)}
+  });
+}
+
+measure();frame();
+window.addEventListener('scroll',request,{passive:true});
+window.addEventListener('resize',function(){measure();request()});
+window.addEventListener('load',function(){measure();request()});
+if(document.fonts&&document.fonts.ready)document.fonts.ready.then(function(){measure();request()});
+document.getElementById('top').addEventListener('click',function(){window.scrollTo({top:0,behavior:reduce?'auto':'smooth'})});
+})();
+</script>
+
+</body>
+</html>
